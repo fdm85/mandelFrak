@@ -25,12 +25,15 @@ static void fDo(Pixel* p, OrbitConf* conf)
 
 
 void fOrbit(Frame* f)
-{;
+{
+    printf ("fOrbit \n");
+    fflush(stdout);
     for (uint32_t i = 0u; i < f->pWidth; ++i)
     {
         if(!(i%100) )
         {
             printf("current at I: %d | %d \n", i, f->pWidth);
+            fflush(stdout);
         }
         for (uint32_t j = 0u; j < f->pHeight; ++j)
         {

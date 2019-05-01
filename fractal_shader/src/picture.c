@@ -18,6 +18,8 @@ void freePicture(Frame * f)
 }
 void allocPicture(Frame * f)
 {
+    printf ("alloc picture \n");
+    fflush(stdout);
     f->pixelCount = f->pWidth * f->pHeight;
     f->p = calloc(f->pixelCount, sizeof(Pixel));
     distributeNumbers(f);
@@ -26,6 +28,8 @@ void allocPicture(Frame * f)
 
 void distributeNumbers(Frame* f)
 {;
+    printf ("distributeNumbers \n");
+    fflush(stdout);
     double dx = (f->fWidth/f->pWidth);
     double dy = (f->fHeight/f->pHeight);
     for (uint32_t i = 0u; i < f->pHeight; ++i)
@@ -64,9 +68,6 @@ static void doIteration(Frame* f, colorFunc func)
             }
         }
     }
-    printf("Nmax was: %d\n", Nmax);
-    printf("C was: %d\n", C);
-    printf("Cmax was: %d\n", Cmax);
 }
 static void tD(Frame* f, Pixel* k)
 {
@@ -89,5 +90,7 @@ static void sW(Frame* f, Pixel* k)
 }
 void doSwColoring(Frame* f)
 {
+    printf ("doSwColoring \n");
+    fflush(stdout);
     doIteration(f, sW);
 }

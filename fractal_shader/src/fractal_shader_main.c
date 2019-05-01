@@ -9,6 +9,9 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <time.h>
 #include "bmp.h"
 #include "orbit.h"
 #include "picture.h"
@@ -20,13 +23,14 @@ Frame f;
 OrbitConf conf;
 int main(int argc, char *argv[])
 {
-    allocPicture(&f);
-
-    doTestColoring(&f);
-//
-    generateBitmapImage("testData.bmp", &f);
-    freePicture(&f);
-
+    time_t start, end;
+    struct tm tmp;
+    time(&start);
+    tmp = *localtime(&start);
+    char stdOutBuf[80];
+    strftime(stdOutBuf, sizeof(stdOutBuf), "Starting at %H:%M:%S \n", &tmp);
+    printf ("%s \n", stdOutBuf);
+    fflush(stdout);
 
     f.orbitConf = &conf;
 
@@ -42,5 +46,10 @@ int main(int argc, char *argv[])
     generateBitmapImage("Sw.bmp", &f);
     freePicture(&f);
 
+    time(&end);
+    tmp = *localtime(&end);
+    double rtInSec = difftime(end, start);
+    printf ("Total Runtime in seconds: %.f \n", rtInSec);
+    fflush(stdout);
     return EXIT_SUCCESS;
 }

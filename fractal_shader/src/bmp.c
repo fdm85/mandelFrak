@@ -109,9 +109,10 @@ void saveToBmp(const char * fileName, const Frame * const f)
 
 void generateBitmapImage(const char * fileName,const Frame * const f)
 {
-
+    printf ("generateBitmapImage \n");
+    fflush(stdout);
     unsigned char padding[3] = {0, 0, 0};
-    int paddingSize = (4 - (f->pWidth*bytesPerPixel) % 4) % 4;
+    uint32_t paddingSize = (4 - (f->pWidth*bytesPerPixel) % 4) % 4;
 
     unsigned char* fileHeader = createBitmapFileHeader(f->pHeight, f->pWidth, paddingSize);
     unsigned char* infoHeader = createBitmapInfoHeader(f->pHeight, f->pWidth);
