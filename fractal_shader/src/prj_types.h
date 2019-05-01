@@ -8,6 +8,7 @@
 #ifndef PRJ_TYPES_H_
 #define PRJ_TYPES_H_
 
+#include <stdbool.h>
 #include <complex.h>
 #include <stdint.h>
 typedef struct _RGB

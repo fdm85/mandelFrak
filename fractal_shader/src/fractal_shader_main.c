@@ -8,27 +8,18 @@
  ============================================================================
  */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
 #include "orbit.h"
 #include "picture.h"
 #include "prj_types.h"
+#include "config.h"
+
 
 Frame f;
 OrbitConf conf;
-int main(void)
+int main(int argc, char *argv[])
 {
-    printf("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-
-//    f.pHeight = 1000uL;
-//    f.pWidth = 1000uL;
-    f.pHeight = 1000uL;
-    f.pWidth = 1000uL;
-    f.fWidth = 2.0f;
-    f.fHeight = 2.0f;
-    f.xStart =-2.0f;
-    f.yStart = 1.0f;
     allocPicture(&f);
 
     doTestColoring(&f);
@@ -36,10 +27,15 @@ int main(void)
     generateBitmapImage("testData.bmp", &f);
     freePicture(&f);
 
-    allocPicture(&f);
-    conf.Nmax = 200uL;
-    conf.M = 16.0f * 16.0f;
+
     f.orbitConf = &conf;
+
+    if(!loadCfgSucceedes(&f, argc, argv))
+    {
+        return EXIT_FAILURE;
+    }
+    allocPicture(&f);
+
     fOrbit(&f);
 
     doSwColoring(&f);
